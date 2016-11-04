@@ -1,1 +1,2 @@
-# buy_my_stuff
+
+Super helpful resource for integrating MongoDB with Node.js: http://www.simonholmes.com/

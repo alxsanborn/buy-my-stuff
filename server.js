@@ -4,10 +4,10 @@ var express = require ('express')
     app = express()
 
 var mongoose = require('mongoose')
-      mongoose.connect('mongodb://localhost/sample')
+      mongoose.connect('mongodb://localhost/buyMyStuffTest')
 
 
-var users = require('./routes/users');
+var user = require('./routes/user');
 var searches = require('./routes/search');
 
 app.set('views', './views')
@@ -27,7 +27,7 @@ app.get('/', function(req, res){
         }
   })
 
-app.use('/users', users)
+app.use('/user', user)
 
 app.listen(3000, function(err){
     if (err) console.log("could not start server")
