@@ -1,6 +1,4 @@
-var mongoose = require('mongoose'),
-    db = mongoose.createConnection('localhost', 'buyMyStuffTest');
-    db.on('error', console.error.bind(console, 'connection error:'));
+var mongoose = require('mongoose');
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -10,9 +8,7 @@ bcrypt.genSalt(10, function(err, salt) {
     });
 });
 
-exports.userlist = function(id, callback) {
-  db.once('open', function(){
-    var userSchema = new mongoose.Schema({
+  var userSchema = new mongoose.Schema({
     first_name: String,
     last_name: String,
     business_name: String,
@@ -47,19 +43,5 @@ exports.userlist = function(id, callback) {
       });
   });
 
-
-  var User = db.model('User', userSchema);
-  User.find({
-    'id': id
-  }, function(err, users){
-    if (err){
-      onErr(err, callback);
-    }
-    else {
-      mongoose.connection.close();
-      console.log(users);
-      callback("", users)
-    }
-  });
-});
-};
+  var User = mongoose.model('User', userSchema)
+  module.exports = User;

@@ -3,15 +3,11 @@ var express = require ('express')
     bodyParser = require('body-parser')
     app = express()
 
-var mongoose = require('mongoose')
-      mongoose.connect('mongodb://localhost/buyMyStuffTest')
+var mongoose = require('mongoose');
 
 
-var user = require('./routes/user');
-var searches = require('./routes/search');
-
-app.set('views', './views')
-app.set('view engine', 'ejs')
+var users = require('./routes/api/users');
+var searches = require('./routes/api/search');
 
 app.use(morgan('dev'))
 app.use(bodyParser.json())
@@ -21,13 +17,10 @@ app.use(function(req,res, next){
 }) //runs middleware
 
 app.get('/', function(req, res){
-  return res.render('index',{header: 'index'});
-    if (req.session.state) {
-        res.json({state: req.session.state});
-        }
+    res.json({message: 'Welcome to Buy My Stuff API!'});
   })
 
-app.use('/user', user)
+app.use('/api/users', users)
 
 app.listen(3000, function(err){
     if (err) console.log("could not start server")
