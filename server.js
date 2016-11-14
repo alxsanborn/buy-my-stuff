@@ -4,6 +4,8 @@ var express = require ('express')
     app = express()
 
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://alex:1234@ds151917.mlab.com:51917/buymystufftest');
 
 
 var users = require('./routes/api/users');
